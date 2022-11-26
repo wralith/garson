@@ -1,7 +1,7 @@
 import GenerateCuid from "cuid"
 
 export abstract class Entity<T> {
-  public readonly id: string
+  public id: string
 
   constructor(id?: string) {
     this.id = id ? id : GenerateCuid()

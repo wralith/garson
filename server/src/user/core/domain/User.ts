@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Entity } from "../../common/domain/Entity"
+import { Entity } from "../../../common/domain/Entity"
 
 export enum UserRoleTypes {
   Client,
@@ -19,10 +19,10 @@ const userSchema = z.object({
     .min(3, "last name name should be longer than 3 characters")
     .max(14, "last name name should be shorter than 14 characters"),
   email: z.string().email("invalid email address"),
-  roles: z.nativeEnum(UserRoleTypes),
+  roles: z.nativeEnum(UserRoleTypes).default(0),
 })
 
-export type UserProps = z.infer<typeof userSchema>
+export type UserProps = z.input<typeof userSchema>
 
 export class User extends Entity<UserProps> {
   firstName: string
