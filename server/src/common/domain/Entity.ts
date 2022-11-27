@@ -1,10 +1,10 @@
-import GenerateCuid from "cuid"
+import { nanoid } from "nanoid"
 
 export abstract class Entity<T> {
   public id: string
 
   constructor(id?: string) {
-    this.id = id ? id : GenerateCuid()
+    this.id = id ? id : nanoid(10)
   }
 
   public equals(o: Entity<T>): boolean {

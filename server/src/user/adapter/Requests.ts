@@ -16,4 +16,4 @@ const registerSchema = z.object({
 
 export type RegisterRequest = z.infer<typeof registerSchema>
 
-export const validateRegisterRequest = (dto: RegisterRequest) => registerSchema.parse(dto)
+export const validateRegisterRequest = (req: RegisterRequest) => registerSchema.parse(req)

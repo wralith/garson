@@ -39,10 +39,7 @@ export class User extends Entity<UserProps> {
   }
 
   public static create(props: UserProps) {
-    const valid = userSchema.safeParse(props)
-    if (!valid.success) {
-      throw Error(valid.error.issues[0].message)
-    }
+    userSchema.parse(props)
     return new User(props)
   }
 }
