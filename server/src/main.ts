@@ -3,6 +3,7 @@ import express from "express"
 import userRouter from "./user/adapter/UserRoutes"
 import tableRouter from "./table/router/TableRoutes"
 import reservationRouter from "./reservation/adapter/http/ReservationRoutes"
+import gracefulShutdown from "./common/util/gracefulShutdown"
 
 export const app = express()
 const port = process.env.PORT || 8080
@@ -18,3 +19,6 @@ app.use("/reservations", reservationRouter)
 
 console.log("starting server at http://localhost:" + port)
 server.listen(port)
+
+process.on("SIGINT", () => gracefulShutdown(server))
+process.on("SIGTERM", () => gracefulShutdown(server))
