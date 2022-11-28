@@ -4,7 +4,7 @@ import http from "http"
 import express from "express"
 
 import { UserController } from "./UserController"
-import { MockUserService } from "../mocks/MockUserService"
+import { MockUserService } from "../../common/mocks/MockUserService"
 
 describe("src/user/adapter/UserController", () => {
   const userController = new UserController(MockUserService)

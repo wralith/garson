@@ -1,6 +1,7 @@
 import { IUserRepo } from "../port/IUserRepo"
-import { User } from "../domain/User"
 import { IUserService } from "../port/IUserService"
+import { User } from "../domain/User"
+import { UserDTO, UserMap } from "./UserDTO"
 
 export class UserService implements IUserService {
   repo: IUserRepo
@@ -9,8 +10,9 @@ export class UserService implements IUserService {
     this.repo = repo
   }
 
-  async getUser(id: string): Promise<User> {
-    return this.repo.get(id)
+  async getUser(id: string): Promise<UserDTO> {
+    const user = await this.repo.get(id)
+    return UserMap.toDto(user)
   }
 
   async createUser(firstName: string, lastName: string, email: string): Promise<string> {

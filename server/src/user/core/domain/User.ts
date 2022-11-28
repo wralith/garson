@@ -38,8 +38,8 @@ export class User extends Entity<UserProps> {
     this.roles = UserRoleTypes.Client
   }
 
-  public static create(props: UserProps) {
+  public static create(props: UserProps, id?: string) {
     userSchema.parse(props)
-    return new User(props)
+    return new User(props, id)
   }
 }

@@ -1,6 +1,7 @@
 import { describe, test, expect } from "@jest/globals"
 import { Table } from "../domain/Table"
 import { TableInMemoryRepo } from "../repo/TableInMemoryRepo"
+import { TableMap } from "./TableDTO"
 import { TableService } from "./TableService"
 
 const dummy = Table.create({
@@ -22,11 +23,11 @@ describe("src/table/service/TableService", () => {
     expect(tables.length).toBe(1)
 
     await service.toggleIsTaken(id)
-    let sameTable = await service.getAll().then((t) => t[0])
-    expect(table.equals(sameTable)).toBe(true)
+    let sameTable = await service.getById(table.id)
     expect(sameTable.isTaken).toBe(true)
     table.name = "Roof-2"
-    sameTable = await service.update(table)
+    const sameTableDomain = TableMap.toDomain(sameTable)
+    sameTable = await service.update(sameTableDomain)
     expect(sameTable.name).toBe("Roof-2")
 
     await service.delete(id)
