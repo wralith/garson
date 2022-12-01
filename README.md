@@ -16,6 +16,13 @@ pnpm test
 # Or
 pnpm test:coverage
 ```
+## Run In Docker
+
+```sh
+cd server
+docker build -t garson-server .
+docker run -it -p 8080:8080 garson-server
+```
 
 ## What is this?
 
